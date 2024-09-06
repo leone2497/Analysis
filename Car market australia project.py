@@ -3,35 +3,45 @@ import streamlit as st
 import seaborn as sn
 import matplotlib.pyplot as plt
 
-cars_market_australia= pd.read_csv("car market australia.csv")
-cars_market_australia
+# Load dataset
+cars_market_australia = pd.read_csv("car market australia.csv")
+st.title("Australia Cars Market Analysis")
 
-st.title("Australia cars market analysis")
+# Sidebar selection
 st.sidebar.title("Type of analysis")
 type_analysis = st.sidebar.selectbox("Choose type", ["Price distribution", "Sales datas", "Features"])
 
+if type_analysis == "Features":
+    Filters = st.sidebar.selectbox("Select filter", ["Price", "Seating Capacity", "Gearbox"])
+    Choice = st.sidebar.selectbox("Brand or model", ["Brand", "Model"])
+    
+    # Group by selected filter and choice
+    brand_sales = cars_market_australia.groupby(Choice)[Filters].sum().sort_values(ascending=False)
+    
+    # Format numbers with commas for better readability
+    brand_sales = brand_sales.apply(lambda x: f'{x:,.0f}')
+    
+    # Display the results
+    st.write(brand_sales)
 
-if type_analysis == "Feature":
-  Filters = st.sidebar("Select filter",["Price","Seating Capacity","Gearbox"])
-  Choice = st.sidebar("Brand or model",["Brand","Model"])
-  brand_sales = cars_market_australia.groupby(Choice)[Filters].sort_values(ascending=False)
-  brand_sales=  brand_sales.apply(lambda x: f'{x:,.0f}')
-  brand_sales
 elif type_analysis == "Sales datas":
-  plt.figure(figsize=(6, 10))
-  data=cars_market_australia['Brand'].value_counts().sort_values(ascending=True).plot(kind='barh')
-  plt.show()
-  
-
-
+    # Plot a horizontal bar plot
+    plt.figure(figsize=(6, 10))
+    data = cars_market_australia['Brand'].value_counts().sort_values(ascending=True).plot(kind='barh')
+    
+    # Display the plot in Streamlit
+    st.pyplot(plt)
 
 elif type_analysis == "Price distribution":
-  Filters = st.sidebar("Select filter",["histogram","lines"])
-  if Filters =="histogram":
-    sn.histplot(df, x=cars_market_australia['Price'], kde=True, log_scale=True)
-    plt.show()
-  elif Filters =="lines":
-    sn.lineplot(x='Brand', y='Price', data=cars_market_australia)
-    plt.show()
-
-
+    # Choose type of plot
+    Filters = st.sidebar.selectbox("Select filter", ["histogram", "lines"])
+    
+    if Filters == "histogram":
+        # Plot a histogram of car prices
+        sn.histplot(cars_market_australia, x='Price', kde=True, log_scale=True)
+        st.pyplot(plt)
+        
+    elif Filters == "lines":
+        # Plot a line plot of prices per brand
+        sn.lineplot(x='Brand', y='Price', data=cars_market_australia)
+        st.pyplot(plt)
