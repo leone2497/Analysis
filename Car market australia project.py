@@ -3,7 +3,7 @@ import streamlit as st
 import seaborn as sn
 import matplotlib.pyplot as plt
 
-cars_market_australia= pd.read_csv("/content/drive/MyDrive/Dati_lavoro/car market australia.csv")
+cars_market_australia= pd.read_csv("car market australia.csv")
 cars_market_australia
 
 st.title("Australia cars market analysis")
