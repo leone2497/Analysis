@@ -16,7 +16,7 @@ if type_analysis == "Features":
     Choice = st.sidebar.selectbox("Brand or model", ["Brand", "Model"])
     
     # Group by selected filter and choice
-    brand= cars_market_australia[Choice, Filters].sort_values(ascending=True)
+    brand= cars_market_australia[[Choice, Filters]].sort_values(by= Filters, ascending=True)
     
     # Format numbers with commas for better readability
     brand= brand.apply(lambda x: f'{x:,.0f}')
