@@ -18,11 +18,9 @@ if type_analysis == "Features":
     # Group by selected filter and choice
     brand= cars_market_australia[[Choice, Filters]].sort_values(by= Filters, ascending=True)
     
-    # Format numbers with commas for better readability
-    brand= brand.apply(lambda x: f'{x:,.0f}')
     
     # Display the results
-    st.write(Choice)
+    st.write(brand)
 
 elif type_analysis == "Sales datas":
     # Plot a horizontal bar plot
@@ -31,6 +29,7 @@ elif type_analysis == "Sales datas":
     
     # Display the plot in Streamlit
     st.pyplot(plt)
+    plt.clf()
 
 elif type_analysis == "Price distribution":
     # Choose type of plot
@@ -40,8 +39,10 @@ elif type_analysis == "Price distribution":
         # Plot a histogram of car prices
         sn.histplot(cars_market_australia, x='Price', kde=True, log_scale=True)
         st.pyplot(plt)
+        plt.clf()
         
     elif Filters == "lines":
         # Plot a line plot of prices per brand
         sn.lineplot(x='Brand', y='Price', data=cars_market_australia)
         st.pyplot(plt)
+        plt.clf()
