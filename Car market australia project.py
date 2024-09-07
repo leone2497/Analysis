@@ -16,13 +16,13 @@ if type_analysis == "Features":
     Choice = st.sidebar.selectbox("Brand or model", ["Brand", "Model"])
     
     # Group by selected filter and choice
-    brand_sales = cars_market_australia.groupby(Choice)[Filters].sum().sort_values(ascending=False)
+    brand= cars_market_australia[Choice, Filters].sort_values(ascending=True)
     
     # Format numbers with commas for better readability
-    brand_sales = brand_sales.apply(lambda x: f'{x:,.0f}')
+    brand= brand.apply(lambda x: f'{x:,.0f}')
     
     # Display the results
-    st.write(brand_sales)
+    st.write(Choice)
 
 elif type_analysis == "Sales datas":
     # Plot a horizontal bar plot
