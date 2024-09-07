@@ -12,7 +12,7 @@ st.sidebar.title("Type of analysis")
 type_analysis = st.sidebar.selectbox("Choose type", ["Price distribution", "Sales datas", "Features"])
 
 if type_analysis == "Features":
-    Filters = st.sidebar.selectbox("Select filter", ["Price", "Seating Capacity", "Gearbox"])
+    Filters = st.sidebar.selectbox("Select filter", ["Price", "Seating Capacity"])
     Choice = st.sidebar.selectbox("Brand or model", ["Brand", "Model"])
     
     # Group by selected filter and choice
