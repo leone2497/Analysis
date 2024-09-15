@@ -26,6 +26,7 @@ elif type_analysis == "Price distribution":
     Filters = st.sidebar.selectbox("Select filter", ["histogram", "lines"])
     data = cars_market_australia['Brand'].value_counts().sort_values(ascending=True)
     data=data.head(7)
+    data=pd.DataFrame(data)
     
     if Filters == "histogram":
         sns.histplot(data, x='Price', kde=True, log_scale=True)
