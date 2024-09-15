@@ -24,13 +24,15 @@ elif type_analysis == "Sales datas":
 
 elif type_analysis == "Price distribution":
     Filters = st.sidebar.selectbox("Select filter", ["histogram", "lines"])
+    data = cars_market_australia['Brand'].value_counts().sort_values(ascending=True)
+    data=data.head(7)
     
     if Filters == "histogram":
-        sns.histplot(cars_market_australia, x='Price', kde=True, log_scale=True)
+        sns.histplot(data, x='Price', kde=True, log_scale=True)
         st.pyplot(plt)
         plt.close()
         
     elif Filters == "lines":
-        sns.lineplot(x='Brand', y='Price', data=cars_market_australia)
+        sns.lineplot(x='Brand', y='Price', data=data)
         st.pyplot(plt)
         plt.close()
