@@ -31,3 +31,6 @@ elif type_analysis == "Price distribution":
         plt.close()
         
     elif Filters == "lines":
+        sns.lineplot(x='Brand', y='Price', data=cars_market_australia)
+        st.pyplot(plt)
+        plt.close()
