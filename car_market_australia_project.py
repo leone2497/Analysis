@@ -26,6 +26,7 @@ elif type_analysis == "Price distribution":
     Filters = st.sidebar.selectbox("Select filter", ["histogram", "lines"])
     top_brands = cars_market_australia['Brand'].value_counts().head(7).index
     data = cars_market_australia[cars_market_australia['Brand'].isin(top_brands)]
+    st.info("The analysis will show only the most 7 sold brands")
 
     
     if Filters == "histogram":
